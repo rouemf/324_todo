@@ -1,0 +1,12 @@
+{
+  "name": "task-manager-app",
+  "version": "1.0.0",
+  "description": "Application de gestion de taches avec Express et frontend statique",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
