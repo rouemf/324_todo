@@ -2,6 +2,8 @@ name: CD
 on: 
     push:
         branches: [main]
+permissions:
+  contents: write
 env:
     ACR_LOGIN_SERVER: m324demoacrqba.azurecr.io
 
@@ -15,6 +17,8 @@ jobs:
 
             - name: Checkout code
               uses: actions/checkout@v4
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Login ACR
               uses: azure/docker-login@v2
@@ -40,5 +44,5 @@ jobs:
                 git config user.name "github-actions[bot]"
                 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                 git add k8s/deployment.yml
-                git commit -m "Deploy: use image m324demoacrqba.azurecr.io/324_todo_nro:${{ steps.tag.outputs.TAG }}"
+                git commit -m "Deploy: use image m324demoacrqba.azurecr.io/324_todo_nro:${{ steps.tag.outputs.TAG }} [skip ci]"
                 git push origin HEAD:main
