@@ -24,9 +24,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
-            
-            - name: Build docker image
-              run: docker build -t 324_todo:latest -f dockerfile .
 
             - name: Login ACR
               uses: azure/docker-login@v2
@@ -35,8 +32,8 @@ jobs:
                 username: ${{ secrets.ACR_USERNAME }}
                 password: ${{ secrets.ACR_PASSWORD }}
 
-            - name: Tag docker image
-              run: docker tag 324_todo:latest ${{ env.ACR_LOGIN_SERVER }}/324_todo:latest
+            - name: Build and tag docker image
+              run: docker build -t ${{ env.ACR_LOGIN_SERVER }}/324_todo_nro:latest -f dockerfile .
             
             - name: Push docker image to ACR
-              run: docker push ${{ env.ACR_LOGIN_SERVER }}/324_todo:latest
+              run: docker push ${{ env.ACR_LOGIN_SERVER }}/324_todo_nro:latest
