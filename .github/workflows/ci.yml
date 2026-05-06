@@ -35,5 +35,8 @@ jobs:
                 username: ${{ secrets.ACR_USERNAME }}
                 password: ${{ secrets.ACR_PASSWORD }}
 
+            - name: Tag docker image
+              run: docker tag 324_todo:latest ${{ env.ACR_LOGIN_SERVER }}/324_todo:latest
+            
             - name: Push docker image to ACR
               run: docker push ${{ env.ACR_LOGIN_SERVER }}/324_todo:latest
