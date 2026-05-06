@@ -5,3 +5,4 @@ yarn-debug.log*
 yarn-error.log*
 dist/
 coverage/
+k9s/secrets.yml
