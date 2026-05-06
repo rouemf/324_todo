@@ -23,8 +23,9 @@ async function request(url, options = {}) {
       if (payload.message) {
         message = payload.message;
       }
-    } catch (_error) {
+    } catch (error) {
       // Ignore parsing errors and keep the default message.
+      console.error("Failed to parse error response:", error);
     }
 
     throw new Error(message);
