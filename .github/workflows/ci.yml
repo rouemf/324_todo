@@ -6,12 +6,9 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '14'
-            - name: Install dependencies
-              run: npm install
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Install Node.js dependencies
+              run: npm ci
             - name: Run ESLint
               run: npm run lint
