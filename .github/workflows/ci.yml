@@ -2,13 +2,35 @@ name: CI
 on: 
     push:
         branches: [main]
+env:
+    ACR_LOGIN_SERVER: m324demoacrqba.azurecr.io
+
 jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
+            
             - name: Install Node.js dependencies
               run: npm ci
+            
             - name: Run ESLint
               run: npm run lint
+
+    build-and-push-docker:
+        runs-on: ubuntu-latest
+        needs: lint
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Build docker image
+              run: docker build -t 324_todo:latest -f .
+
+            - name: Login ACR
+              uses: azure/docker-login@v2
+              with:
+                login-server: ${{ env.ACR_LOGIN_SERVER }}
+                username: ${{ secrets.ACR_USERNAME }}
+                password: ${{ secrets.ACR_PASSWORD }}
