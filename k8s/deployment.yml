@@ -16,7 +16,7 @@ spec:
         - name: acr-pull
       containers:
         - name: todo-nro
-          image: m324demoacrqba.azurecr.io/324_todo_nro:88a4f6b
+          image: m324demoacrqba.azurecr.io/324_todo_nro:68e8c24
           ports:
             - containerPort: 3000
 ---
